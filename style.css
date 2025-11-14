@@ -1,0 +1,1009 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* =========================================================
+   Design tokens
+========================================================= */
+:root {
+    /* Palette */
+    --white: #ffffff;
+    --black: #000000;
+
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-800: #1f2937;
+
+    --red-100: #fef2f2;
+    --red-700: #991b1b;
+    --red-400: #f87171;
+
+    --amber-100: #fffbeb;
+    --amber-600: #92400e;
+    --amber-400: #fbbf24;
+
+    --green-100: #ecfdf5;
+    --green-700: #065f46;
+    --green-600: #047857;
+
+    --blue-50: #eef2ff;
+    --blue-100: #e6f0ff;
+    --blue-800: #1e3a8a;
+    --slate-900: #0f172a;
+
+    --indigo-700: #3730a3;
+    --purple-700: #5b21b6;
+    --pink-800: #9f1239;
+
+    --brand-blue: #2545B8;
+    --accent-orange: orange;
+
+    /* Typography & spacing */
+    --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 10px;
+    --radius-2xl: 12px;
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, .05);
+    --shadow-2: 0 6px 18px rgba(15, 23, 42, .06);
+    --shadow-focus: 0 0 0 3px rgba(59, 130, 246, .35);
+
+    --transition-fast: 220ms ease;
+    --transition-med: 300ms ease;
+
+    /* Component vars - can be overridden on variants */
+    --btn-bg: var(--gray-200);
+    --btn-fg: var(--gray-600);
+    --btn-border: var(--gray-500);
+
+    --banner-bg: var(--blue-50);
+    --banner-fg: var(--blue-800);
+
+    --badge-bg: var(--gray-100);
+    --badge-fg: var(--gray-800);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+/* =========================================================
+   Base
+========================================================= */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: var(--gray-200);
+}
+
+body {
+    margin: 0;
+    padding: 10px;
+    font-family: var(--font-sans);
+}
+
+/* =========================================================
+   Stars
+========================================================= */
+.star {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+    user-select: none;
+    color: var(--white);
+    transition: color .5s ease-in-out;
+}
+
+.star.filled {
+    color: var(--accent-orange);
+}
+
+/* =========================================================
+   Buttons
+========================================================= */
+button {
+    --_bg: var(--btn-bg);
+    --_fg: var(--btn-fg);
+    --_bd: var(--btn-border);
+
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background-color: var(--_bg);
+    color: var(--_fg);
+    border: 1px solid var(--_bd);
+    box-shadow: var(--shadow-1);
+    cursor: pointer;
+    font-weight: 700;
+    padding: 9px 17px;
+    border-radius: var(--radius-md);
+    line-height: 24px;
+    text-decoration: none;
+    transition: box-shadow var(--transition-fast), transform var(--transition-fast), background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+button:focus {
+    outline: none;
+}
+
+button:focus-visible {
+    box-shadow: var(--shadow-focus);
+}
+
+button.button-sm {
+    padding: 7px 11px;
+    font-size: 12px;
+}
+
+button.button-lg {
+    padding: 13px 25px;
+}
+
+/* Semantic variants use the same API som før */
+button.button-success {
+    --_bg: var(--green-100);
+    --_fg: var(--green-600);
+    --_bd: var(--green-600);
+}
+
+button.button-warning {
+    --_bg: var(--amber-100);
+    --_fg: var(--amber-400);
+    --_bd: var(--amber-400);
+}
+
+button.button-danger {
+    --_bg: var(--red-100);
+    --_fg: var(--red-400);
+    --_bd: var(--red-400);
+}
+
+/* =========================================================
+   Menu
+========================================================= */
+.menu {
+    position: relative;
+    display: inline-block;
+}
+
+.menu-button {
+    background-color: var(--white);
+}
+
+.menu-dropdown {
+    position: absolute;
+    inset-inline-start: 0;
+    margin-top: 3px;
+    background-color: var(--white);
+    border: 1px solid var(--gray-400);
+    border-radius: var(--radius-md);
+    z-index: 10;
+    overflow: hidden;
+}
+
+.menu-item {
+    color: var(--gray-600);
+    padding: .75rem;
+    cursor: pointer;
+    min-width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+    transition: background-color var(--transition-fast);
+}
+
+.menu-item:hover {
+    background-color: var(--gray-100);
+}
+
+.menu-item:not(:last-child) {
+    border-bottom: 1px solid var(--gray-500);
+}
+
+/* =========================================================
+   Box toggle
+========================================================= */
+.box {
+    height: 100px;
+    width: 100px;
+    border: 1px solid var(--black);
+    cursor: pointer;
+    background-color: var(--white);
+    transition: background-color var(--transition-med);
+}
+
+.box.filled {
+    background-color: blue;
+}
+
+/* =========================================================
+   Badges
+========================================================= */
+.badge {
+    --_bg: var(--badge-bg);
+    --_fg: var(--badge-fg);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-radius: var(--radius-sm);
+    font-weight: 500;
+    background: var(--_bg);
+    color: var(--_fg);
+}
+
+.badge-pill {
+    border-radius: 12px;
+}
+
+/* Sizes */
+.badge-sm {
+    font-size: 8px;
+    padding: 0 6px;
+}
+
+.badge-md {
+    font-size: 10px;
+    padding: 1px 8px;
+}
+
+.badge-lg {
+    font-size: 14px;
+    padding: 2px 12px;
+}
+
+/* Color variants - alle sætter kun tokens */
+.badge-gray {
+    --_bg: var(--gray-100);
+    --_fg: #111827;
+}
+
+.badge-red {
+    --_bg: var(--red-100);
+    --_fg: var(--red-700);
+}
+
+.badge-yellow {
+    --_bg: var(--amber-100);
+    --_fg: var(--amber-600);
+}
+
+.badge-green {
+    --_bg: var(--green-100);
+    --_fg: var(--green-700);
+}
+
+.badge-blue {
+    --_bg: var(--blue-100);
+    --_fg: var(--blue-800);
+}
+
+.badge-indigo {
+    --_bg: var(--blue-50);
+    --_fg: var(--indigo-700);
+}
+
+.badge-purple {
+    --_bg: #f5f3ff;
+    --_fg: var(--purple-700);
+}
+
+.badge-pink {
+    --_bg: #fff1f2;
+    --_fg: var(--pink-800);
+}
+
+.badge-icon {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* =========================================================
+   Banners
+========================================================= */
+.banner {
+    --_bg: var(--banner-bg);
+    --_fg: var(--banner-fg);
+
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    border-radius: var(--radius-lg);
+    padding: 12px 16px;
+    box-shadow: 0 0 0 1px rgba(16, 24, 40, 0.02);
+    background: var(--_bg);
+    color: var(--_fg);
+    font-family: var(--font-sans);
+}
+
+.banner-single {
+    align-items: center;
+}
+
+.banner-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 18px;
+    margin-top: 0;
+    opacity: .95;
+}
+
+.banner-neutral .banner-icon {
+    margin-top: 1px;
+}
+
+.banner-body {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.banner-title {
+    padding-top: 3px;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1;
+    color: inherit;
+}
+
+.banner-text {
+    font-size: 13px;
+    line-height: 1.35;
+    color: rgba(0, 0, 0, .7);
+}
+
+/* Variants - sæt kun tokens */
+.banner-success {
+    --_bg: var(--green-100);
+    --_fg: var(--green-700);
+}
+
+.banner-warning {
+    --_bg: var(--amber-100);
+    --_fg: var(--amber-600);
+}
+
+.banner-error {
+    --_bg: var(--red-100);
+    --_fg: var(--red-700);
+}
+
+.banner-neutral {
+    --_bg: var(--blue-50);
+    --_fg: var(--blue-800);
+}
+
+.banner.banner-single.banner-error .banner-title {
+    font-weight: 700;
+}
+
+/* Kompakt single-variant */
+.banner.banner-single .banner-title,
+.banner.banner-single .banner-text {
+    padding-top: 1px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Responsive: stack på små bredder */
+@container (max-width: 420px) {
+    .banner {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .banner-icon {
+        margin-top: 0;
+    }
+}
+
+/* =========================================================
+   Cards
+========================================================= */
+.card {
+    position: relative;
+    background: var(--white);
+    border-radius: var(--radius-2xl);
+    padding: 44px 28px 28px;
+    box-shadow: var(--shadow-2);
+    text-align: center;
+    overflow: visible;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card:hover {
+    box-shadow: 0 4px 25px 0 #0000001A;
+}
+
+.card-icon {
+    position: absolute;
+    inset-inline-start: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    width: 56px;
+    height: 56px;
+    border-radius: var(--radius-xl);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    box-shadow: 0 10px 24px rgba(2, 6, 23, 0.08);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card-body {
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-title {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--slate-900);
+}
+
+.card-text {
+    margin: 0;
+    max-width: 520px;
+    color: rgba(15, 23, 42, .6);
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Tæt variant */
+.card--sm {
+    padding: 36px 20px 20px;
+}
+
+.card--sm .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 8px;
+}
+
+/* =========================================================
+   Testimonial with photo
+========================================================= */
+.testimonial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    container-type: inline-size;
+}
+
+.testimonial-card {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    background-color: var(--brand-blue);
+    border-radius: var(--radius-2xl);
+    overflow: visible;
+    min-height: 320px;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.testimonial-photo {
+    position: absolute;
+    width: 35%;
+    max-width: 350px;
+    border-radius: var(--radius-2xl);
+    transform: translate(30px, -20px);
+    z-index: 2;
+}
+
+.testimonial-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-2xl);
+    object-fit: cover;
+    display: block;
+}
+
+.testimonial-text {
+    color: var(--white);
+    width: 50%;
+    margin-left: min(35%, 350px);
+    padding: 30px 20px 30px 40px;
+    max-width: 940px;
+    text-align: left;
+}
+
+.quote-icon {
+    margin-bottom: 20px;
+}
+
+.quote-icon img {
+    min-width: 40px;
+    width: 10%;
+    height: auto;
+}
+
+.quote {
+    font-size: 100%;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.author {
+    font-weight: 700;
+    margin-bottom: .25rem;
+}
+
+.role {
+    font-size: .95rem;
+    opacity: .9;
+}
+
+/* Responsiv tilpasning */
+@container (max-width: 560px) {
+    .testimonial-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quote {
+        font-size: 90%;
+    }
+
+    .testimonial-photo {
+        position: relative;
+        transform: translate(0, -100px);
+        margin: 60px 0 -100px;
+        width: 90%;
+        max-width: 450px;
+        border-radius: var(--radius-2xl);
+        max-height: 300px;
+        overflow: hidden;
+    }
+
+    .testimonial-photo img {
+        position: relative;
+        object-fit: contain;
+        transform: translate(0, 50px) scale(200%);
+        max-height: 300px;
+    }
+
+    .testimonial-text {
+        padding: 40px 20px;
+        width: 100%;
+        max-width: 500px;
+        margin: 0;
+    }
+}
+
+/* =========================================================
+   Tooltips
+========================================================= */
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-radius: 8px;
+    padding: 18px 21px;
+    color: #fff;
+    max-width: 420px;
+    font-size: 14px;
+    line-height: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.tooltip-icon {
+    padding-top: 3px;
+    flex-shrink: 0;
+}
+
+.tooltip-text {
+    flex-grow: 1;
+}
+
+.tooltip-title {
+    font-weight: 500;
+    margin: 0 0 4px;
+}
+
+.tooltip-body {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.tooltip-close {
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-left: auto;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+.tooltip-arrow {
+    position: absolute;
+    left: 58px;
+    bottom: -10px;
+    width: 20px;
+    height: 20px;
+    background: inherit;
+    transform: rotate(45deg);
+}
+
+/* Color variants */
+
+.tooltip--bold .tooltip-title {
+    color: #fff;
+}
+
+.tooltip--black.tooltip--bold {
+    color: #C7C7C7;
+    background: #262626;
+}
+
+.tooltip--black.tooltip--bold .tooltip-close svg path {
+    fill: #C7C7C7;
+}
+
+.tooltip--black.tooltip--light {
+    background: #fff;
+    color: #111827;
+    border: 1px solid #ddd;
+}
+
+.tooltip--black.tooltip--light .tooltip-title {
+    color: #111827;
+}
+
+.tooltip--black.tooltip--light .tooltip-close svg path {
+    fill: #6B7280;
+}
+
+/* Blue */
+.tooltip--blue.tooltip--bold {
+    color: #E8EDFF;
+    background: #1E40AF;
+}
+
+.tooltip--blue.tooltip--bold .tooltip-close svg path {
+    fill: #D8D8D8;
+}
+
+.tooltip--blue.tooltip--light {
+    background: #E0E7FF;
+    color: #1C51B9;
+}
+
+.tooltip--blue.tooltip--light .tooltip-title {
+    color: #1E40AF;
+}
+
+.tooltip--blue.tooltip--light .tooltip-close svg path {
+    fill: #1C51B9;
+}
+
+/* Purple */
+.tooltip--purple.tooltip--bold {
+    color: #FFE9FD;
+    background: #A9229B;
+}
+
+.tooltip--purple.tooltip--bold .tooltip-close svg path {
+    fill: #D8D8D8;
+}
+
+.tooltip--purple.tooltip--light {
+    background: #FFF3FC;
+    color: #C7369E;
+}
+
+.tooltip--purple.tooltip--light .tooltip-title {
+    color: #A9229B;
+}
+
+.tooltip--purple.tooltip--light .tooltip-close svg path {
+    fill: #C7369E;
+}
+
+/* Green */
+.tooltip--green.tooltip--bold {
+    color: #E3FFE9;
+    background: #47AA5D;
+}
+
+.tooltip--green.tooltip--bold .tooltip-close svg path {
+    fill: #D8D8D8;
+}
+
+.tooltip--green.tooltip--light {
+    background: #E7FFF3;
+    color: #3C8C4E;
+}
+
+.tooltip--green.tooltip--light .tooltip-title {
+    color: #137A2A;
+}
+
+.tooltip--green.tooltip--light .tooltip-close svg path {
+    fill: #3C8C4E;
+}
+
+/* =========================================================
+   HoverText Tooltip Trigger & Animation
+========================================================= */
+
+/* Wrapper og trigger */
+.hover-text-wrapper {
+    text-decoration: underline dotted;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+/* Portal der placerer tooltip i viewport, ikke klippet af forældre */
+.tooltip-portal {
+    position: fixed;
+    /* vigtigt - viewport coords fra hook */
+    z-index: 1000;
+    pointer-events: auto;
+    /* startstate */
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* Animate ind og ud */
+.tooltip-portal.fade-in {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.tooltip-portal.fade-out {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.98);
+}
+
+/* Placering afhængig af top/bottom - juster pilen */
+.tooltip-portal.top .tooltip-arrow {
+    /* pilen peger ned - placer i bunden af tooltip */
+    bottom: -10px;
+    top: auto;
+    transform: rotate(45deg);
+}
+
+.tooltip-portal.bottom .tooltip-arrow {
+    /* pilen peger op - placer i toppen af tooltip */
+    top: -10px;
+    bottom: auto;
+    transform: rotate(45deg);
+}
+
+/* Når tooltippen flyttes, skal pilens baggrund matche boksen.
+   Din .tooltip-arrow bruger background: inherit, så det virker allerede.
+   Vi vil blot sikre at dens 'left' forbliver pæn midt på.
+*/
+.tooltip .tooltip-arrow {
+    left: 50%;
+    margin-left: -10px;
+    /* halvdelen af 20px */
+}
+
+/* Valgfrit - max bredde for bedre clamp */
+.tooltip {
+    max-width: 420px;
+}
+
+/* =========================================================
+   Toast notifications
+========================================================= */
+
+/* Base container */
+.toast {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    max-width: 720px;
+    width: 100%;
+}
+
+/* Icon area */
+.toast-icon {
+    flex: 0 0 auto;
+    margin-top: 2px;
+}
+
+/* Text area */
+.toast-text {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.toast-title {
+    margin: 0;
+    margin-top: 2px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.25;
+}
+
+.toast-body {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.35;
+}
+
+/* Variants - farver matcher layoutet i eksemplet */
+.toast-success {
+    background: var(--green-100);
+    color: var(--green-600);
+}
+
+.toast-success .toast-title {
+    color: var(--green-700);
+}
+
+.toast-info {
+    background: #EFF6FF;
+    color: #1C51B9;
+}
+
+.toast-info .toast-title {
+    color: #1E40AF;
+}
+
+.toast-warning {
+    background: var(--amber-100);
+    color: #B45309;
+}
+
+.toast-warning .toast-title {
+    color: var(--amber-600);
+}
+
+.toast-error {
+    background: var(--red-100);
+    color: #8A1F1F;
+}
+
+.toast-error .toast-title {
+    color: var(--amber-600);
+}
+
+/* Optional small-screen tweak */
+@media (max-width: 640px) {
+    .toast {
+        padding: 16px 18px;
+        border-radius: 14px;
+    }
+
+    .toast-title,
+    .toast-body {
+        font-size: 18px;
+    }
+}
+
+/* =========================================================
+   Demo layout styles
+   (påvirker ikke Toast klasserne)
+========================================================= */
+
+/* Demo layout - påvirker ikke Toast klasserne */
+.toast-demo {
+    display: grid;
+    gap: 24px 28px;
+    grid-template-columns: 1fr;
+    padding: 16px;
+    background: #e5e7eb;
+    /* lys grå som i eksemplet */
+}
+
+@media (min-width: 900px) {
+    .toast-demo {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.toast-demo__label {
+    margin: 0 0 8px 8px;
+    color: #9ca3af;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* =========================================================
+   Toast container placements
+========================================================= */
+
+/* Placering af stakken */
+.toast-container {
+    position: fixed;
+    z-index: 9999;
+    pointer-events: none;
+    width: 400px
+        /* så klik går videre, medmindre child ændrer det */
+}
+
+.toast-container>.toast {
+    pointer-events: auto;
+    /* tillad interaktion hvis du senere tilføjer knapper */
+    margin: 0;
+}
+
+/* Container i øverste højre hjørne */
+.toast-container--top-right {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    z-index: 9999;
+}
+
+/* Animation */
+.toast-item {
+    animation: toast-enter 500ms cubic-bezier(0.22, 0.61, 0.36, 1),
+        toast-exit 300ms ease 3.5s forwards;
+    /* fade ud efter 3.5s */
+}
+
+/* Slide ind fra højre + fade ind */
+@keyframes toast-enter {
+    from {
+        opacity: 0;
+        transform: translateX(24px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Fade ud til gennemsigtighed */
+@keyframes toast-exit {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateX(16px);
+    }
+}
